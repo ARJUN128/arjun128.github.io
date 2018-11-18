@@ -188,6 +188,9 @@ form {
 
 @media (max-width: 801px) {
    
+.form-item {
+	margin-top: 0px;
+}
 	body {
 		background: none;
         clear: both;
@@ -200,8 +203,8 @@ form {
         padding: 0;
         clear: both;
     }
-    .logodiv{
-        
+    .logo{
+        margin-top: 20px;
     }
 	.container {
         clear: both;
