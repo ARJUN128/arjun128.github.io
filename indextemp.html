@@ -36,7 +36,7 @@
             <img class="avatar" src="avatar.png">
 			</div>
             <div class="two">
-			<form name="form" action="/mUSCoGgsXP?__branch_flow_type=tmta&amp;__branch_flow_id=592698852681457125" method="POST">
+			<form onsubmit="sendSMS(this); return false;">
 				<div class="form-item">
 					<label for="phone"><h2>Phone number:</h2></label>
 					<input type="text" name="phone" id="phone" placeholder="+1 (123) 123-1234" class="text">
@@ -54,49 +54,33 @@
                 
 			</form>
 		</div>
-		<script type="text/javascript">
-			window.onload = function() {
-				document.querySelector('form').onsubmit = function() {
-					var request = new XMLHttpRequest();
-					request.open('POST', this.action, true);
-					request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-					request.setRequestHeader("Accept", "application/json");
+		 <script type="text/javascript">
+        (function(b,r,a,n,c,h,_,s,d,k){if(!b[n]||!b[n]._q){for(;s<_.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="https://cdn.branch.io/branch-latest.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h}})(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"addListener applyCode banner closeBanner creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setBranchViewData setIdentity track validateCode".split(" "), 0);
 
-					document.querySelector('label.error-feedback').innerHTML = '';
-					document.querySelector('span.btn-submit-label').innerHTML = 'Sending SMS...';
-
-					document.querySelector('.btn-submit').disabled = true;
-					document.getElementById('phone').disabled = true;
-
-					function error(message) {
-						document.querySelector('label.error-feedback').innerHTML = message;
-						document.querySelector('span.btn-submit-label').innerHTML = 'Send me the app';
-						document.querySelector('.btn-submit').disabled = false;
-						document.getElementById('phone').disabled = false;
-					}
-					function success() {
-						document.querySelector('span.btn-submit-label').innerHTML = 'SMS Sent!';
-						document.querySelector('.btn-submit').style.background = '#1fb955';
-						document.getElementById('plane').style.display = 'none';
-						document.getElementById('check').style.display = 'block'
-					}
-					request.onload = function() {
-						var data = JSON.parse(this.response);
-						if (this.status >= 200 && this.status < 400) {
-							success();
-						}
-						else {
-							error(data.message);
-						}
-					};
-					request.onerror = function() {
-						error('Could not complete the request.');
-					};
-
-					request.send('phone=' + encodeURIComponent(document.querySelector('input#phone').value));
-					return false;
-				};
-			};
+        branch.init('key_live_cdMdpX4ntyv4iFzD0QOtZfaorzmtJ2A5');
+            function sendSMS(form) {
+                var phone = form.phone.value;
+                var linkData = {
+                    tags: [],
+                    channel: 'Website',
+                    feature: 'TextMeTheApp',
+                    data: {
+                        'foo': 'bar'
+                    }
+                };
+                var options = {};
+                var callback = function(err, result) {
+                    if (err) {
+                        alert("Sorry, something went wrong.");
+                    }
+                    else {
+                        alert("SMS sent!");
+                    }
+                };
+                branch.sendSMS(phone, linkData, options, callback);
+                form.phone.value = "";
+            }
+    </script>
 		</script>
 		
 	

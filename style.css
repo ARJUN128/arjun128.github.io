@@ -131,7 +131,7 @@ padding: 50px;
 /*}*/
 .avatar{
      border-radius: 50%;
-    border: solid lightgreen 10px;
+    border: solid #6ED33F 10px;
     width: 15rem;
     height: 15rem;
     float: left;
